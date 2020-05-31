@@ -1,20 +1,32 @@
 PODS:
   - Alamofire (5.2.1)
   - CRNotifications (1.2.1)
+  - MBProgressHUD (1.1.0)
+  - Nuke (9.0.0)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - CRNotifications
+  - MBProgressHUD (~> 1.1.0)
+  - Nuke
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - CRNotifications
+    - MBProgressHUD
+    - Nuke
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   CRNotifications: 2799786cb63e104c75699843d8928afd680182f3
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  Nuke: 4390bfb0fcde6aecf314f854439d03914ee7c604
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: e8f86ac85f87965bc7a8604395c6517750a36f3c
+PODFILE CHECKSUM: e60338139009d722803c643581c03bdd87a4d9a5
 
 COCOAPODS: 1.9.3
