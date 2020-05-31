@@ -18,6 +18,7 @@
 		053552592483D8CB000954B4 /* MoviesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053552582483D8CB000954B4 /* MoviesListCell.swift */; };
 		0535525B2483DE9C000954B4 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0535525A2483DE9C000954B4 /* Movie.swift */; };
 		0535525D2483E3FC000954B4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0535525C2483E3FC000954B4 /* NetworkService.swift */; };
+		055F3B78248438A700355F8B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 055F3B77248438A700355F8B /* WebKit.framework */; };
 		9097496FFDAF922ED572704A /* Pods_Movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 308B3735DCF53816D7B46E77 /* Pods_Movies.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		053552582483D8CB000954B4 /* MoviesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListCell.swift; sourceTree = "<group>"; };
 		0535525A2483DE9C000954B4 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		0535525C2483E3FC000954B4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		055F3B77248438A700355F8B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		308B3735DCF53816D7B46E77 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C41C1350EFE9022BD690DC4 /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
 		A47DCA3446642F9262576B8E /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				055F3B78248438A700355F8B /* WebKit.framework in Frameworks */,
 				9097496FFDAF922ED572704A /* Pods_Movies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +159,7 @@
 		A205F3661860EC329FB7C120 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				055F3B77248438A700355F8B /* WebKit.framework */,
 				308B3735DCF53816D7B46E77 /* Pods_Movies.framework */,
 			);
 			name = Frameworks;

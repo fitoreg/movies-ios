@@ -23,16 +23,16 @@ import UIKit
 
 struct Movie: Decodable {
     
-  let id: String
-  let title: String
-  let duration: String
-  let genre: String
-  let releaseYear: String
-  let director: String
-  let rating: String
-  let country: String
-  let trailerURL: String
-  let posterThumbnailURL: String
+  var id: String
+  var title: String
+  var duration: String
+  var genre: String
+  var releaseYear: String
+  var director: String
+  var rating: String
+  var country: String
+  var trailerURL: String
+  var posterThumbnailURL: String
 
   enum CodingKeys: String, CodingKey {
     case id
@@ -47,7 +47,10 @@ struct Movie: Decodable {
     case posterThumbnailURL
   }
     
-    
+    init?() {
+        return nil
+    }
+        
     init(id: String, title: String, duration: String, genre: String, releaseYear: String, director: String, rating: String, country: String, trailerURL: String, posterThumbnailURL: String) {
         self.id = id
         self.title = title
@@ -60,7 +63,6 @@ struct Movie: Decodable {
         self.trailerURL = trailerURL
         self.posterThumbnailURL = posterThumbnailURL
     }
-    
 }
 
 

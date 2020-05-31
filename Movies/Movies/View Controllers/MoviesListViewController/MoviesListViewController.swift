@@ -14,6 +14,7 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var moviesList = [Movie]()
+    var selectedMovie = Movie()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +29,18 @@ class MoviesListViewController: UIViewController {
     }
     
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail" {
+            let detailVC = segue.destination as! MovieDetailViewController
+            detailVC.movie = self.selectedMovie
+        }
     }
-    */
-
 }
 
 // MARK: UITableViewDelegate
@@ -61,6 +64,11 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 150
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedMovie = moviesList[indexPath.row]
+        self.performSegue(withIdentifier: "showDetail", sender: nil)
     }
 }
