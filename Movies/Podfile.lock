@@ -1,3 +1,20 @@
-PODFILE CHECKSUM: cf593628a1a6b221153a35a40dcaa68e85ff54b7
+PODS:
+  - Alamofire (5.2.1)
+  - CRNotifications (1.2.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - CRNotifications
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CRNotifications
+
+SPEC CHECKSUMS:
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  CRNotifications: 2799786cb63e104c75699843d8928afd680182f3
+
+PODFILE CHECKSUM: e8f86ac85f87965bc7a8604395c6517750a36f3c
 
 COCOAPODS: 1.9.3
