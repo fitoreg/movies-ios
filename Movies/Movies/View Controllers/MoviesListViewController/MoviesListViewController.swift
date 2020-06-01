@@ -63,6 +63,7 @@ class MoviesListViewController: UIViewController {
         NetworkService.shared.fetchFilms(completion: { (movies, error) in
              if let movies = movies {
                  self.moviesList = movies
+                 self.filteredMoviesList = movies
                  self.tableView.reloadData()
              }
          })
