@@ -21,7 +21,6 @@ class NetworkService: NSObject {
     
     // MARK: GET
     func fetchFilms(completion: @escaping(_ data: [Movie]?, _ error: NSError?) -> Void) {
-      // 1
       AF.request("http://localhost:8080/movies", method: .get).validate().responseJSON { response in
         switch response.result {
             case .success(let value):
@@ -65,5 +64,14 @@ class NetworkService: NSObject {
         }
       }
     }
-
+    
+    // MARK: POST
+    func postMovie(movie: Movie) {
+        AF.request("http://localhost:8080/movies",
+                   method: .post,
+                   parameters: movie,
+                   encoder: JSONParameterEncoder.default).response { response in
+            debugPrint(response)
+        }
+    }
 }

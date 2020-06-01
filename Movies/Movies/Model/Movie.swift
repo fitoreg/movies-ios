@@ -21,7 +21,7 @@ import UIKit
 "posterThumbnailURL": "https://images-na.ssl-images-amazon.com/images/I/71HyTegC0SL._AC_SY879_.jpg"
 */
 
-struct Movie: Decodable {
+struct Movie: Encodable, Decodable {
     
   var id: String
   var title: String
