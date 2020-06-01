@@ -25,9 +25,7 @@ class NetworkService: NSObject {
         switch response.result {
             case .success(let value):
             let json = JSON(value)
-            print(json)
-            var resultsArray = [Movie]()
-            
+            var resultsArray = [Movie]()            
             for item in json {
                 // Parse ID
                 let idDict = item.1

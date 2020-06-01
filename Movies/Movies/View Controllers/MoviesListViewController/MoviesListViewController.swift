@@ -26,6 +26,8 @@ class MoviesListViewController: UIViewController {
                 self.tableView.reloadData()
             }
         })
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMoviesList(notification:)), name: .updateList, object: nil)
     }
     
 
@@ -40,6 +42,17 @@ class MoviesListViewController: UIViewController {
             let detailVC = segue.destination as! MovieDetailViewController
             detailVC.movie = self.selectedMovie
         }
+    }
+    
+    @objc func updateMoviesList(notification: Notification) {
+        self.moviesList.removeAll()
+        // Do any additional setup after loading the view.
+        NetworkService.shared.fetchFilms(completion: { (movies, error) in
+             if let movies = movies {
+                 self.moviesList = movies
+                 self.tableView.reloadData()
+             }
+         })
     }
 }
 
@@ -71,4 +84,8 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
         self.selectedMovie = moviesList[indexPath.row]
         self.performSegue(withIdentifier: "showDetail", sender: nil)
     }
+}
+
+extension Notification.Name {
+     static let updateList = Notification.Name("updateList")
 }

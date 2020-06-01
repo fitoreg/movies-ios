@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CRNotifications
 
 class AddMovieViewController: UIViewController {
 
@@ -40,11 +41,23 @@ class AddMovieViewController: UIViewController {
     */
 
     @IBAction func addMovieButtonPressed(_ sender: Any) {
-        
-        let movie = Movie(id: "", title: movieTitleTextField.text!, duration: movieDurationTextField.text!, genre: movieGenreTextField.text!, releaseYear: movieReleaseYearTextField.text!, director: movieDirectorReleaseYear.text!, rating: movieRatingTextField.text!, country: movieCountryTextField.text!, trailerURL: movieTrailerTextField.text!, posterThumbnailURL: moviePosterTextField.text!)
-        
-        NetworkService.shared.postMovie(movie: movie)
-        
-        self.dismiss(animated: true, completion: nil)
+        if (movieTitleTextField.text!.isEmpty || movieDurationTextField.text!.isEmpty || movieGenreTextField.text!.isEmpty || movieReleaseYearTextField.text!.isEmpty || movieDirectorReleaseYear.text!.isEmpty || movieRatingTextField.text!.isEmpty || movieCountryTextField.text!.isEmpty || movieTrailerTextField.text!.isEmpty || moviePosterTextField.text!.isEmpty) {
+            CRNotifications.showNotification(type: CRNotifications.error, title: "Error!", message: "Please fill all text fields", dismissDelay: 3)
+        } else {
+            let movie = Movie(id: "", title: movieTitleTextField.text!,
+                              duration: movieDurationTextField.text!,
+                              genre: movieGenreTextField.text!,
+                              releaseYear: movieReleaseYearTextField.text!,
+                              director: movieDirectorReleaseYear.text!,
+                              rating: movieRatingTextField.text!,
+                              country: movieCountryTextField.text!,
+                              trailerURL: movieTrailerTextField.text!,
+                              posterThumbnailURL: moviePosterTextField.text!)
+            NetworkService.shared.postMovie(movie: movie)
+            CRNotifications.showNotification(type: CRNotifications.success, title: "Success!", message: "Movie added successfully!", dismissDelay: 3)
+            self.dismiss(animated: true) {
+                NotificationCenter.default.post(name: .updateList, object: nil)
+            }
+        }
     }
 }
