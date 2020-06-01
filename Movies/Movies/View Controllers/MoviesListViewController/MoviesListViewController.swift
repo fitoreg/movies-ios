@@ -14,7 +14,10 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var moviesList = [Movie]()
+    var filteredMoviesList = [Movie]()
     var selectedMovie = Movie()
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,7 @@ class MoviesListViewController: UIViewController {
        NetworkService.shared.fetchFilms(completion: { (movies, error) in
             if let movies = movies {
                 self.moviesList = movies
+                self.filteredMoviesList = movies
                 self.tableView.reloadData()
             }
         })
@@ -42,6 +46,11 @@ class MoviesListViewController: UIViewController {
             let detailVC = segue.destination as! MovieDetailViewController
             detailVC.movie = self.selectedMovie
         }
+        
+        if segue.identifier == "showStats" {
+            let statsVC = segue.destination as! StatisticsViewController
+            statsVC.movies = moviesList
+        }
     }
     
     @objc func updateMoviesList(notification: Notification) {
@@ -54,17 +63,20 @@ class MoviesListViewController: UIViewController {
              }
          })
     }
+    @IBAction func showStatsButtonPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "showStats", sender: nil)
+    }
 }
 
 // MARK: UITableViewDelegate
 extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return moviesList.count
+        return filteredMoviesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MoviesListCell", for: indexPath) as! MoviesListCell
-        let movie = moviesList[indexPath.row]
+        let movie = filteredMoviesList[indexPath.row]
 
         Nuke.loadImage(with: URL(string: movie.posterThumbnailURL)!, into: cell.moviePosterImageView)
         
@@ -81,11 +93,24 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedMovie = moviesList[indexPath.row]
+        self.selectedMovie = filteredMoviesList[indexPath.row]
         self.performSegue(withIdentifier: "showDetail", sender: nil)
+    }
+}
+
+extension MoviesListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty == false {
+            filteredMoviesList = moviesList.filter { (movie: Movie) -> Bool in
+              return movie.title.lowercased().contains(searchText.lowercased())
+            }
+            tableView.reloadData()
+        }
     }
 }
 
 extension Notification.Name {
      static let updateList = Notification.Name("updateList")
 }
+
+

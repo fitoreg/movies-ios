@@ -21,6 +21,9 @@
                                     <constraint firstAttribute="height" constant="44" id="Pa3-C2-LqA"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="JOe-kl-B0H"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SCi-0h-Mn6">
                                 <rect key="frame" x="0.0" y="184" width="414" height="678"/>
@@ -117,6 +120,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movies" largeTitleDisplayMode="always" id="vNi-Nd-Fif">
+                        <barButtonItem key="leftBarButtonItem" title="Stats" image="chart.bar" catalog="system" id="tAF-a0-Jaa">
+                            <connections>
+                                <action selector="showStatsButtonPressed:" destination="BYZ-38-t0r" id="1dE-Am-81y"/>
+                                <segue destination="b3c-QQ-sjG" kind="show" identifier="showStats" id="1i6-1A-bjO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aYZ-rZ-gjt">
                             <connections>
                                 <segue destination="eY6-0c-ow2" kind="presentation" id="1fJ-SH-mQK"/>
@@ -124,6 +133,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="KhF-rH-iDX" id="UjD-O0-nqa"/>
                         <outlet property="tableView" destination="SCi-0h-Mn6" id="E3r-iF-FRP"/>
                         <segue destination="GW8-Le-61E" kind="show" identifier="showDetail" id="sUX-4x-BHZ"/>
                     </connections>
@@ -377,6 +387,57 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="136.60714285714286"/>
         </scene>
+        <!--Statistics-->
+        <scene sceneID="mKu-jw-DwL">
+            <objects>
+                <viewController title="Statistics" id="b3c-QQ-sjG" customClass="StatisticsViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gF1-iq-Nrr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ARf-qY-xgn">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatsCell" textLabel="CBQ-gu-EpS" style="IBUITableViewCellStyleDefault" id="vWo-ma-KVL">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vWo-ma-KVL" id="8NT-eu-eg6">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CBQ-gu-EpS">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="b3c-QQ-sjG" id="akH-Vg-hoy"/>
+                                    <outlet property="delegate" destination="b3c-QQ-sjG" id="NOP-kI-NJg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="LqE-XH-sEv" firstAttribute="bottom" secondItem="ARf-qY-xgn" secondAttribute="bottom" id="Mmx-gj-zJb"/>
+                            <constraint firstItem="ARf-qY-xgn" firstAttribute="leading" secondItem="LqE-XH-sEv" secondAttribute="leading" id="Qgn-qR-wOw"/>
+                            <constraint firstItem="LqE-XH-sEv" firstAttribute="trailing" secondItem="ARf-qY-xgn" secondAttribute="trailing" id="ZDV-aV-Yrl"/>
+                            <constraint firstItem="ARf-qY-xgn" firstAttribute="top" secondItem="LqE-XH-sEv" secondAttribute="top" id="lem-ui-jHk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LqE-XH-sEv"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Statistics" id="mRr-Nw-XMq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qN8-3P-6Bv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053.6231884057972" y="-522.32142857142856"/>
+        </scene>
         <!--Add Movie-->
         <scene sceneID="Y1X-F7-1cL">
             <objects>
@@ -396,4 +457,7 @@
             <point key="canvasLocation" x="2014.4927536231885" y="-88.392857142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chart.bar" catalog="system" width="128" height="90"/>
+    </resources>
 </document>
