@@ -17,17 +17,23 @@ class NetworkService: NSObject {
     private override init() { }
 
     // MARK: Shared Instance
+    /*
+    The Network Service class is a Singleton, that can be used anywhere in our project by instatiating it once.
+    */
     static let shared = NetworkService()
     
     // MARK: GET
     func fetchFilms(completion: @escaping(_ data: [Movie]?, _ error: NSError?) -> Void) {
+      
+      // GET Request is being called here
       AF.request("http://localhost:8080/movies", method: .get).validate().responseJSON { response in
         switch response.result {
             case .success(let value):
             let json = JSON(value)
             var resultsArray = [Movie]()            
             for item in json {
-                // Parse ID
+
+                // JSON is parsed here
                 let idDict = item.1
                 let identifier = idDict["id"].stringValue
                 let title = idDict["title"].stringValue
@@ -52,10 +58,12 @@ class NetworkService: NSObject {
                                    trailerURL: trailerURL,
                                    posterThumbnailURL: posterThumbnailURL)
     
-               resultsArray.append(result)
+               // add movie object to results array
+                resultsArray.append(result)
 
             }
             
+            // Return the array containing all movie objects
             completion(resultsArray, nil)
         case .failure(let error):
             print(error)
@@ -65,6 +73,7 @@ class NetworkService: NSObject {
     
     // MARK: POST
     func postMovie(movie: Movie) {
+        // POST Request is called here
         AF.request("http://localhost:8080/movies",
                    method: .post,
                    parameters: movie,

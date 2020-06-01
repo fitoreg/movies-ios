@@ -23,7 +23,10 @@ import Foundation
 */
 
 struct Movie: Encodable, Decodable {
-    
+  
+  /*
+   These are the properties (fields) of the Movie Model class
+   */
   var id: String
   var title: String
   var duration: String
@@ -35,6 +38,9 @@ struct Movie: Encodable, Decodable {
   var trailerURL: String
   var posterThumbnailURL: String
 
+    /*
+    These keys are used to decode the JSON object that is retrieved from the server.
+    */
   enum CodingKeys: String, CodingKey {
     case id
     case title
@@ -51,7 +57,10 @@ struct Movie: Encodable, Decodable {
     init?() {
         return nil
     }
-        
+    
+    /*
+    Constructor
+    */
     init(id: String, title: String, duration: String, genre: String, releaseYear: String, director: String, rating: String, country: String, trailerURL: String, posterThumbnailURL: String) {
         self.id = id
         self.title = title

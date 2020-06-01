@@ -11,18 +11,19 @@ import Nuke
 
 class MoviesListViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
-    
+    // Class variables
     var moviesList = [Movie]()
     var filteredMoviesList = [Movie]()
     var selectedMovie = Movie()
     
+    // Outlets for UIElements
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+       // Once the view is loaded and visible, we fetch the movies from our NetworkService
        NetworkService.shared.fetchFilms(completion: { (movies, error) in
             if let movies = movies {
                 self.moviesList = movies
@@ -31,6 +32,7 @@ class MoviesListViewController: UIViewController {
             }
         })
         
+        // We add an observer to update the movie list, in case we decide to add another movie
         NotificationCenter.default.addObserver(self, selector: #selector(updateMoviesList(notification:)), name: .updateList, object: nil)
     }
     
@@ -38,7 +40,7 @@ class MoviesListViewController: UIViewController {
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // This method is used to handle the navigation between ViewControllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -53,9 +55,11 @@ class MoviesListViewController: UIViewController {
         }
     }
     
+    // This method is fired when we add a new movie.
+    // First we remove all objects from the array, and fetch the movies from API again
     @objc func updateMoviesList(notification: Notification) {
         self.moviesList.removeAll()
-        // Do any additional setup after loading the view.
+        self.filteredMoviesList.removeAll()
         NetworkService.shared.fetchFilms(completion: { (movies, error) in
              if let movies = movies {
                  self.moviesList = movies
@@ -63,6 +67,8 @@ class MoviesListViewController: UIViewController {
              }
          })
     }
+    
+    // Navigate to StatisticsViewcontroller
     @IBAction func showStatsButtonPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "showStats", sender: nil)
     }
@@ -70,10 +76,13 @@ class MoviesListViewController: UIViewController {
 
 // MARK: UITableViewDelegate
 extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // This method determines how many rows our table will show
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredMoviesList.count
     }
     
+    // This method is called for each table view row. The data to be displayed in each cell is configured here.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MoviesListCell", for: indexPath) as! MoviesListCell
         let movie = filteredMoviesList[indexPath.row]
@@ -88,16 +97,19 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    // Method to determine height of the row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
     
+    // Once we click on a row, we will navigate to the Movie Detail Screen
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedMovie = filteredMoviesList[indexPath.row]
         self.performSegue(withIdentifier: "showDetail", sender: nil)
     }
 }
 
+// This method handles search
 extension MoviesListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty == false {

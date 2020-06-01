@@ -10,8 +10,12 @@ import UIKit
 
 class MoviesListCell: UITableViewCell {
     
-    @IBOutlet weak var moviePosterImageView: UIImageView!
+    /*
+    This class serves to display the TableView Cell used in the Movie List ViewController
+    */
     
+    // Outlets of the UI Elements
+    @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
